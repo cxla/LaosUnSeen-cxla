@@ -30,6 +30,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+
 import masterung.androidthai.in.th.laosunseen.MainActivity;
 import masterung.androidthai.in.th.laosunseen.R;
 import masterung.androidthai.in.th.laosunseen.utility.MyAlert;
@@ -143,6 +145,8 @@ public class RegisterFragment extends Fragment {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Toast.makeText(getActivity(), "Success Upload Photo", Toast.LENGTH_SHORT).show();
                 findPathURLPhoto();
+                createPost();
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -153,9 +157,43 @@ public class RegisterFragment extends Fragment {
 
     }
 
-    private void findPathURLPhoto() {
+    private void createPost() {
+        ArrayList<String> stringsArrayList = new ArrayList<>();
+        stringsArrayList.add("Hello");
+        myPostString = stringsArrayList.toString();
+        Log.d("9AugV1", "myPost ==> " + myPostString);
 
     }
+
+    private void findPathURLPhoto() {
+        try { // Code ທີ່ສ່ຽງຕໍ່ການ Error ໃຫ້ໃສ່  Try Catch
+
+            FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+            StorageReference storageReference = firebaseStorage.getReference();
+            // ດຶງມາໃນຮູບແບບຂອງສະຕິງອາເລ
+            final String[] urlStrings = new String[1];
+            storageReference.child("Avata").child(nameString)
+            .getDownloadUrl()
+            .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    urlStrings[0] = uri.toString();
+                    pathURLStirng = urlStrings[0];
+                    Log.d("9AugV1", "pathURL ==>" + pathURLStirng);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("9AugV1", "e Error ==>" + e.toString());
+                }
+            });
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }//FindPath
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
