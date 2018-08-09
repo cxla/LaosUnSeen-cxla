@@ -141,7 +141,6 @@ public class RegisterFragment extends Fragment {
                 });
 
     }
-
     private void UploadPhotoToFirebase() {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReference();
