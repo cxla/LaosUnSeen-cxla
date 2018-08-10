@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--Toolbar-->
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarService"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:background="@color/colorPrimary"
+    <!--List Fiend-->
+    <ListView
+        android:layout_above="@+id/LinearButtom"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
-    <!--content-->
+        android:layout_height="match_parent">
 
-
-
-
-</LinearLayout>
+    </ListView>
+    <!--Post   -->
+    <LinearLayout
+        android:id="@+id/LinearButtom"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--Textfield-->
+        <EditText
+            android:id="@+id/edtPost"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:hint="Your Post"
+            android:inputType="text" />
+        <!--Bottom-->
+        <Button
+            android:id="@+id/btnPost"
+            android:background="@drawable/bg_button"
+            android:text="Post"
+            android:layout_weight="1.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>
